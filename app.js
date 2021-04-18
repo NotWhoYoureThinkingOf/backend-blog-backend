@@ -67,6 +67,16 @@ db.once("open", () => {
     } else {
       console.log("Error triggering Pusher");
     }
+
+    // if (change.operationType === "delete") {
+    //   const postDetails = change.fullDocument;
+    //   pusher.trigger("posts", "deleted", {
+    //     title: postDetails.title,
+    //     description: postDetails.description,
+    //   });
+    // } else {
+    //   console.log("Error triggering Pusher");
+    // }
   });
 });
 
