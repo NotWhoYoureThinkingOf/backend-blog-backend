@@ -61,6 +61,7 @@ db.once("open", () => {
     if (change.operationType === "insert") {
       const postDetails = change.fullDocument;
       pusher.trigger("posts", "inserted", {
+        id: postDetails._id,
         title: postDetails.title,
         description: postDetails.description,
       });
