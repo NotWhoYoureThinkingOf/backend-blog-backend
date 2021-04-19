@@ -61,23 +61,13 @@ db.once("open", () => {
     if (change.operationType === "insert") {
       const postDetails = change.fullDocument;
       pusher.trigger("posts", "inserted", {
-        id: postDetails._id,
+        _id: postDetails._id,
         title: postDetails.title,
         description: postDetails.description,
       });
-    } else {
-      console.log("Error triggering Pusher");
+    } else if (change.operationType === "delete") {
+      pusher.trigger("posts", "deleted", change.documentKey._id);
     }
-
-    // if (change.operationType === "delete") {
-    //   const postDetails = change.fullDocument;
-    //   pusher.trigger("posts", "deleted", {
-    //     title: postDetails.title,
-    //     description: postDetails.description,
-    //   });
-    // } else {
-    //   console.log("Error triggering Pusher");
-    // }
   });
 });
 
